@@ -5,6 +5,16 @@ const express = require("express");
 // Create an Express application
 const app = express();
 
+//middleware to parse JSON request bodies
+app.use(express.json());
+
+// Middleware
+/*app.use((req, res, next) => {
+    console.log("Middleware Executed");
+    next();
+});*/
+
+
 // Home Route
 app.get("/", (req, res) => {
     res.send("Welcome to My First MERN Application");
@@ -12,7 +22,12 @@ app.get("/", (req, res) => {
 
 //Stduent Route
 app.get("/student", (req, res) => {
-    res.send("Welcome to Student Route");
+    res.send("Welcome to Student get Route");
+});
+
+//student post Route
+app.post("/student", (req, res) => {
+    res.send("Student Data Posted Successfully");
 });
 
 // Teacher Route
@@ -36,7 +51,26 @@ app.get("/student/:id",(req,res)=>{
     res.send(`Student ID is ${req.params.id}`);
 });
 
-//contact Route
+//student post Route with parameter
+app.post("/student/:id",(req,res)=>{
+    res.send(`Student ID is ${req.params.id} and Data Posted Successfully
+        name: ${req.body.name} q
+        age : ${req.body.age}`);
+});
+
+//student put with route parameter
+app.put("/student/:id",(req,res)=>{
+    res.send(`Student ID is ${req.params.id} and Data Updated Successfully
+        name: ${req.body.name} 
+        age : ${req.body.age}`);
+});
+
+//student delete with route parameter
+app.delete("/student/:id",(req,res)=>{
+    res.send(`Student ID is ${req.params.id} and Data Deleted Successfully`);
+});
+
+// contact Route
 app.get("/contact",(req,res)=>{
     res.send("Contact Administrator");
 });
